@@ -1,0 +1,67 @@
+module: nerf
+
+seed: 0
+bound: 8.0
+num_epochs: 300
+eval_interval: 50
+backend: torch  # [torch, cuda, tcnn]
+cuda_ray: false
+fp16: false
+metrics:
+  - PSNR
+  - LPIPS
+
+data:
+  dataset_name: KITTI_Odometry
+  scene: "00"
+  selector: kitti
+  scene_scale: 1.0
+  image_size: null
+  normalization_mode: camera  # [camera, pointcloud]
+  depth_clip: 0.0
+  stereo: mono  # [mono, stereo, spider] # 当前数据集仅支持单目数据
+  annotation: false
+  mask_away_sky: false # 当前数据集不具备天空的gt标注，该flag不要打开
+  preload: true
+
+network:
+  num_layers: 2
+  hidden_dim: 64
+  geo_feat_dim: 15
+  num_layers_color: 3
+  hidden_dim_color: 64
+
+criterion:
+  image_loss: 1.0
+  depth_loss: 0.0 # 暂未提供depth信息，请不要改变这个值
+  transmittance_loss: 0.0
+  depth_variance_regularization: 1.e-3
+
+optimizer:
+  learning_rate: 1.e-3
+  learning_rate_pose: 1.e-3
+  weight_decay: 1.e-6
+  lr_scheduler_gamma: 0.33
+  lr_scheduler_step_size: 100
+  lr_scheduler_steps: 4
+
+extrinsic:
+  optimize_extrinsics: true
+  annealing_start: 0.0
+  annealing_end: 0.3
+  annealing_start_level: 12
+
+renderer:
+  num_steps: 128
+  upsample_steps: 128
+  max_ray_batch: 4096
+  z_far: -1
+
+sampler:
+  sampler: "GridRaySampler"  #["GridRaySampler", "SemanticRaySampler"]
+  num_rays: 4096
+
+test:
+  fps: 10
+  crf: 24
+  alpha_premultiplied: false
