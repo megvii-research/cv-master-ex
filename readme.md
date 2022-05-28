@@ -14,11 +14,19 @@ Currently, `--ff` only supports GPUs with CUDA architecture `>= 70`.
     - `kitti_odometry`数据可以通过[链接](https://studio.brainpp.com/dataset/3840?name=kiiti%EF%BC%88%E5%A4%84%E7%90%86%E8%BF%87%E7%9A%84%E9%83%A8%E5%88%86%E6%95%B0%E6%8D%AE%EF%BC%89)获得。下载数据，解压后将整个文件夹拷贝到`datasets`目录下
     - 如果需要其他场景的数据，请将数据集按照`kitti_odometry`数据集的格式拷贝到`datasets`文件夹下，并且修改对应的config
     - 提示：所有数据都放进去直接训练很可能会OOM，作业要求是对场景分块，想要快速测试网络，可以将`./nerf/Atlantic_datasets/selector.py`里面选择的图片数量改少一点（不能过于少，因为数据处理里面有对于整个场景的归一化操作，过于少无法选择合适的框，建议选择50张图片）
+    - 其他：数据集包含pose和image。pose中前面部分和image有序对应。多余的pose可以用做测试渲染新视角的图片（PS：如果是训练场景外的pose，渲染效果差于场景内），也可以选择不用这部分pose，自定义渲染视角测试效果。
 
 - 训练脚本改为通过config配置
     - 如果不指定config文件则会按照默认的配置执行
     - config文件按照：基础配置，数据，网络参数等分级配置
     - 可以通过修改config配置，执行不同的实验
+ 
+- exercise 相关：
+    - 实现“大场景”（包含数据集1600+图片内容的场景）分块融合
+    - 本代码只提供训练数据集的前100张图片，仅作为codebase，分块和融合策略请自行添加
+    - 提交代码压缩包和可视化效果（图片视频）
+        - 可以额外附加文档说明分块融合的策略（也可以卸载代码注释中）
+        - 可视化不仅要有训练集中的pose渲染图片，还要有val集的pose渲染效果，最好可以有其他视角的渲染效果（酌情加分）
 
 ## Train
 ```bash
