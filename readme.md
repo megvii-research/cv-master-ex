@@ -53,7 +53,7 @@ A pytorch implementation of [instant-ngp](https://github.com/NVlabs/instant-ngp)
 
 # Acknowledgement
 
-* Credits for the amazing [torch-ngp](https://github.com/ashawkey/torch-ngp), which provides a pytorch CUDA extension implementation of instant-ngp (sdf and nerf). I am extremely grateful to [Ashawkey](https://github.com/ashawkey) open scoure this rewarding code. With this torch version codebase, it is easier to understand instnt-ngp and more convenient to experiment iteration.
+* Credits for the amazing [torch-ngp](https://github.com/ashawkey/torch-ngp), which provides a pytorch CUDA extension implementation of instant-ngp (sdf and nerf). I am extremely grateful to [Ashawkey](https://github.com/ashawkey) open source this rewarding code. With this torch version codebase, it is easier to understand instnt-ngp and more convenient to experiment iteration.
 
 * Difference from the original torch-ngp:
     * 保持：
