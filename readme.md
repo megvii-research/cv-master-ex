@@ -1,5 +1,6 @@
 # 环境配置
-
+## 讲义
+* https://github.com/megvii-research/introduction-neural-3d-reconstruction
 ## Install
 ```bash
 pip install -r requirements.txt
